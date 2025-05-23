@@ -15,19 +15,19 @@ import { Accordion, AccordionItem, Avatar, AvatarGroup } from 'accessible-astro-
       <h2 class='mb-16 text-6xl'>Services</h2>
       <div class='grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3'>
         <Feature icon='lucide:palette' title='Web Design'>
-          From landing pages to full websites, we design and develop web solutions that are
-          tailored to your needs.
+          From landing page to CMS-driven corporate hub, we design and develop a web presence for your business or product.
         </Feature>
-        <Feature icon='lucide:puzzle' title='Product Design'>
-          We create user-friendly and visually appealing products that enhance the user experience.
+        <Feature icon='lucide:puzzle' title='Product Innovation'>
+          Together with our clients, we build innovative products based on extensive user research and technical
+          know-how.
         </Feature>
         <Feature icon='lucide:sun' title='Emerging Tech'>
-          We explore and implement the latest technologies such as AI and AR to create innovative solutions.
+          We explore and implement upcoming technologies such as AI and AR to create innovative solutions.
         </Feature>
       </div>
     </div>
   </section>
-  <ContentMedia imgSrc='/accessible-components.webp'>
+  <!-- <ContentMedia imgSrc='/accessible-components.webp'>
     <h2>Accessible components</h2>
     <p class='text-2xl'>
       This theme provides plenty of tried and tested Accessible Astro Components. Some are native to this theme and a
@@ -43,7 +43,7 @@ import { Accordion, AccordionItem, Avatar, AvatarGroup } from 'accessible-astro-
       navigation and components, clear outlines and tab indicators and the right color contrast, you're more certain of
       reaching WCAG AA compliance.
     </p>
-  </ContentMedia>
+  </ContentMedia> -->
   <section class='my-64'>
     <div class='container grid grid-cols-1 gap-12 md:grid-cols-2'>
       <div class='flex flex-col items-start gap-4'>
@@ -56,71 +56,68 @@ import { Accordion, AccordionItem, Avatar, AvatarGroup } from 'accessible-astro-
       </div>
       <div class='space-content'>
         <Accordion>
-          <AccordionItem name='exclusive' title='What is WCAG and why is it important?' open>
+          <AccordionItem name='exclusive' title='What is Sunwave Studio and how can you help me?' open>
             <p>
-              WCAG (Web Content Accessibility Guidelines) is a set of internationally recognized standards for web
-              accessibility. Following WCAG ensures your website is usable by people with various disabilities,
-              including visual, auditory, physical, and cognitive impairments. It's important not just for
-              accessibility, but also for legal compliance, SEO, and reaching a wider audience.
+              We are a small studio that specializes in web design, product innovation, and emerging technologies. We
+              can help you create a website for your business, design and develop an MVP for your startup, or explore
+              the possibilities of AI and AR for your product. Our team is dedicated to providing high-quality services
+              tailored to your needs.
             </p>
           </AccordionItem>
-          <AccordionItem name='exclusive' title="What's the difference between ARIA labels and alt text?">
+          <AccordionItem name='exclusive' title='What differentiates you from classic dev agencies?'>
             <p>
-              Alt text is specifically for describing images to screen reader users, while ARIA labels (aria-label,
-              aria-labelledby) can describe any element on a page. Alt text is HTML's native way to provide alternative
-              text for images, while ARIA labels are part of the ARIA specification that helps make dynamic content and
-              advanced UI controls more accessible.
+              We are a small team of experts who are passionate about what we do. We focus on quality over quantity and
+              work closely with our clients. We are not a body shop, but instead will join you during the entire
+              process, from ideation to implementation. We are also committed to using the latest technologies and best
+              practices to ensure that our solutions are not only functional but also accessible and user-friendly.
             </p>
           </AccordionItem>
-          <AccordionItem name='exclusive' title='Why is keyboard navigation important?'>
+          <AccordionItem name='exclusive' title='How does the pricing work?'>
             <p>
-              Keyboard navigation is essential for users who can't use a mouse, including people with motor
-              disabilities, visual impairments, or those who simply prefer keyboard controls. A website should be fully
-              operable using only a keyboard, with visible focus indicators and logical tab order. This includes being
-              able to access all interactive elements and navigate through content efficiently.
+              Usually we offer two options: an hourly rate or an equity model. The hourly rate is great for funded
+              startups or established companies. The equity model is a great option for early stage startups that are
+              looking for a partner to help them build their product. We are flexible and can work with you to find the
+              best solution for your needs. When it comes to equity, we reserve the right to vet the project and the
+              team before we start working together.
             </p>
           </AccordionItem>
-          <AccordionItem name='exclusive' title='What is a sufficient color contrast ratio?'>
+          <AccordionItem name='exclusive' title='Do you offer fixed price projects?'>
             <p>
-              According to WCAG 2.2 AA standards, text should have a minimum contrast ratio of 4.5:1 against its
-              background for regular text, and 3:1 for large text (18pt or 14pt bold). For non-text elements like icons
-              or buttons, a minimum ratio of 3:1 is required. This ensures content is readable for users with visual
-              impairments or color blindness.
+              Due to the innovative and uncertain nature of our projects, we do not offer classic statements of work with fixed time, scope and budget. While we guarantee the highest quality in design and engineering craftsmanship, the scope of the project might change multiple times based on new market insights. Nevertheless, what we can offer are hourly packages with clearly defined goals, such as building a prototype or supporting a market launch.
             </p>
           </AccordionItem>
-          <AccordionItem name='exclusive' title='How do I make custom components accessible?'>
+          <AccordionItem name='exclusive' title='What is the process of working with you?'>
             <p>
-              To make custom components accessible, focus on these key aspects: use semantic HTML where possible,
-              implement proper keyboard support, add appropriate ARIA attributes, manage focus when needed, and ensure
-              adequate color contrast. Always test with screen readers and keyboard navigation. Consider using
-              established design patterns from the <a href='https://www.w3.org/WAI/ARIA/apg/patterns/'
-                >ARIA Authoring Practices Guide</a
-              >.
+              We start with a discovery phase where we learn about your business, your goals, and your target audience. 
             </p>
           </AccordionItem>
         </Accordion>
       </div>
     </div>
+    <section class='my-64'>
+      <div class='space-content container'>
+        <h2 class='text-6xl'>Contact us</h2>
+        <p class='text-2xl'>
+          If you are interested in our services or have any questions, please feel free to reach out to us.
+        </p>
+        <AvatarGroup display='grid' gridItemsSize='300px' gridGap='2rem'>
+          <Avatar initials='RJ' title='Christian Rahaus' subtitle='Studio Manager' email='christian@effeqtiv.com' />
+          <Avatar
+            initials='MT'
+            title='Simon Schmalfeld'
+            subtitle='Chief Creative Technologist'
+            email='simon@effeqtiv.com'
+          />
+        </AvatarGroup>
+      </div>
+    </section>
   </section>
-  <section class='my-64'>
-    <div class='space-content container'>
-      <h2 class='text-6xl'>Contact us</h2>
-      <p class='text-2xl'>
-        If you are interested in our services or have any questions, please feel free to reach out to us. We are here to help
-        you with your web design, product design, and emerging tech needs.
-      </p>
-      <AvatarGroup display='grid' gridItemsSize='300px' gridGap='2rem'>
-        <Avatar initials='RJ' title='Christian Rahaus' subtitle='Studio Manager' email="christian@effeqtiv.com" />
-        <Avatar initials='MT' title='Simon Schmalfeld' subtitle='Chief Creative Technologist' email="simon@effeqtiv.com" />
-      </AvatarGroup>
-    </div>
-  </section>
-</DefaultLayout>
 
-<style>
-  .avatar {
-    border: 1px solid var(--border-color-subtle);
-    border-radius: var(--radius-md);
-    padding: var(--space-s);
-  }
-</style>
+  <style>
+    .avatar {
+      border: 1px solid var(--border-color-subtle);
+      border-radius: var(--radius-md);
+      padding: var(--space-s);
+    }
+  </style>
+</DefaultLayout>
