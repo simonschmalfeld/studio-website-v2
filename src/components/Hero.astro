@@ -7,7 +7,6 @@ import { Image } from 'astro:assets'
  *
  * @description A component that displays a hero section with a title, description, and image
  */
-
 ---
 
 <section class='hero my-24'>
@@ -33,7 +32,7 @@ import { Image } from 'astro:assets'
           </a> -->
         </div>
       </div>
-      <div id='hero-text' class='hero-image-wrapper hidden font-["Domine"] text-xl leading-10 lg:block mt-24'>
+      <div id='hero-text' class='hero-image-wrapper mt-24 hidden font-["Domine"] text-xl leading-10 lg:block'>
         <!-- <Image class='hero-image' src={src} alt='' decoding='async' width={800} height={600} loading='eager' /> -->
         <p id='typewriter-text'>
           <span class='cursor'>|</span>
@@ -116,7 +115,7 @@ import { Image } from 'astro:assets'
     const typingSpeed = 30 // milliseconds per character
 
     // Set initial state with invisible text to reserve layout space
-    typewriterElement.innerHTML = `<span style="visibility: hidden;">${text}</span><span class="cursor" style="position: absolute; left: 0;">|</span>`
+    typewriterElement.innerHTML = `<span class="cursor">|</span><span style="visibility: hidden;">${text}</span>`
 
     function typeCharacter() {
       if (currentIndex < text.length && typewriterElement) {
@@ -126,12 +125,8 @@ import { Image } from 'astro:assets'
         currentIndex++
         setTimeout(typeCharacter, typingSpeed)
       } else if (typewriterElement) {
-        // Remove cursor after typing is complete
-        setTimeout(() => {
-          if (typewriterElement) {
-            typewriterElement.innerHTML = text
-          }
-        }, 1000)
+        // Keep cursor blinking after typing is complete
+        typewriterElement.innerHTML = `${text}`
       }
     }
 
