@@ -10,6 +10,7 @@
     top: 0;
     left: 0;
     z-index: -1;
+    filter: drop-shadow(0 0 20px #8b5cf6);
     width: 100vw;
     height: 100vh;
     pointer-events: none;
@@ -35,6 +36,7 @@
     private mouse = { x: 0, y: 0 }
     private scrollY = 0
     private animationId: number | null = null
+    private backgroundGradient: CanvasGradient | null = null
 
     constructor(canvas: HTMLCanvasElement) {
       this.canvas = canvas
@@ -53,6 +55,8 @@
     private resize() {
       this.canvas.width = window.innerWidth
       this.canvas.height = window.innerHeight
+      // Reset background gradient on resize
+      this.backgroundGradient = null
       // Reinitialize triangles to account for new canvas size
       this.initTriangles()
     }
@@ -69,7 +73,7 @@
           originalY: y,
           size: Math.random() * 20 + 10,
           rotation: Math.random() * 360,
-          opacity: Math.random() * 0.3 + 0.1,
+          opacity: Math.random() * 0.4 + 0.2, // Higher base opacity for better glow visibility
           speed: Math.random() * 0.5 + 0.2,
           parallaxSpeed: Math.random() * 0.3 + 0.1, // Different parallax speeds for layered effect
         })
@@ -88,20 +92,22 @@
       this.ctx.lineTo(triangle.size / 2, triangle.size / 2)
       this.ctx.closePath()
 
+      // Purple gradient for triangles
       const gradient = this.ctx.createLinearGradient(
         -triangle.size / 2,
         -triangle.size / 2,
         triangle.size / 2,
         triangle.size / 2
       )
-      gradient.addColorStop(0, '#3b82f6')
-      gradient.addColorStop(0.5, '#8b5cf6')
-      gradient.addColorStop(1, '#06b6d4')
+      gradient.addColorStop(0, '#8b5cf6')
+      gradient.addColorStop(0.3, '#a855f7')
+      gradient.addColorStop(0.6, '#c084fc')
+      gradient.addColorStop(1, '#e879f9')
 
       this.ctx.fillStyle = gradient
       this.ctx.fill()
 
-      this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)'
+      this.ctx.strokeStyle = 'rgba(168, 85, 247, 0.6)'
       this.ctx.lineWidth = 1
       this.ctx.stroke()
 
@@ -109,18 +115,20 @@
     }
 
     private animate = () => {
-      // Clear canvas with gradient background
-      const gradient = this.ctx.createLinearGradient(0, 0, this.canvas.width, this.canvas.height)
-      gradient.addColorStop(0, '#0f172a')
-      gradient.addColorStop(0.5, '#1e293b')
-      gradient.addColorStop(1, '#334155')
+      // Clear canvas with purple gradient background (create once and reuse)
+      if (!this.backgroundGradient) {
+        this.backgroundGradient = this.ctx.createLinearGradient(0, 0, this.canvas.width, this.canvas.height)
+        this.backgroundGradient.addColorStop(0, '#1d0035')
+        this.backgroundGradient.addColorStop(0.5, '#2d0042')
+        this.backgroundGradient.addColorStop(1, '#42004c')
+      }
 
-      this.ctx.fillStyle = gradient
+      this.ctx.fillStyle = this.backgroundGradient
       this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
 
       // Update and draw triangles
       this.triangles.forEach((triangle) => {
-        // Apply parallax effect based on scroll position (negative for upward movement)
+        // Apply parallax effect
         triangle.y = triangle.originalY - this.scrollY * triangle.parallaxSpeed
 
         const dx = this.mouse.x - triangle.x
@@ -140,20 +148,11 @@
           triangle.rotation += triangle.speed
         }
 
-        // Wrap around edges with parallax consideration
-        if (triangle.x < -50) triangle.x = this.canvas.width + 50
-        if (triangle.x > this.canvas.width + 50) triangle.x = -50
-
-        // For Y wrapping, consider the parallax offset
-        const parallaxOffset = -this.scrollY * triangle.parallaxSpeed
-        if (triangle.y < -50 + parallaxOffset) {
-          triangle.originalY = this.canvas.height + 50
-          triangle.y = triangle.originalY + parallaxOffset
-        }
-        if (triangle.y > this.canvas.height + 50 + parallaxOffset) {
-          triangle.originalY = -50
-          triangle.y = triangle.originalY + parallaxOffset
-        }
+        // Simplified edge wrapping
+        if (triangle.x < -30) triangle.x = this.canvas.width + 30
+        if (triangle.x > this.canvas.width + 30) triangle.x = -30
+        if (triangle.y < -30) triangle.originalY = this.canvas.height + 30
+        if (triangle.y > this.canvas.height + 30) triangle.originalY = -30
 
         this.drawTriangle(triangle)
       })
