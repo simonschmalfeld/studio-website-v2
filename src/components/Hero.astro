@@ -7,14 +7,7 @@ import { Image } from 'astro:assets'
  *
  * @description A component that displays a hero section with a title, description, and image
  */
-interface Props {
-  /**
-   * The source URL for the image
-   */
-  src?: string
-}
 
-const { src = '/sunset.jpg' }: Props = Astro.props
 ---
 
 <section class='hero my-24'>
@@ -40,7 +33,7 @@ const { src = '/sunset.jpg' }: Props = Astro.props
           </a> -->
         </div>
       </div>
-      <div id='hero-text' class='hero-image-wrapper hidden font-["Domine"] text-xl leading-10 lg:block'>
+      <div id='hero-text' class='hero-image-wrapper hidden font-["Domine"] text-xl leading-10 lg:block mt-24'>
         <!-- <Image class='hero-image' src={src} alt='' decoding='async' width={800} height={600} loading='eager' /> -->
         <p id='typewriter-text'>
           <span class='cursor'>|</span>
