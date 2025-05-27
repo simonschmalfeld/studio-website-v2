@@ -36,7 +36,6 @@
     private mouse = { x: 0, y: 0 }
     private scrollY = 0
     private animationId: number | null = null
-    private backgroundGradient: CanvasGradient | null = null
 
     constructor(canvas: HTMLCanvasElement) {
       this.canvas = canvas
@@ -55,10 +54,30 @@
     private resize() {
       this.canvas.width = window.innerWidth
       this.canvas.height = window.innerHeight
-      // Reset background gradient on resize
-      this.backgroundGradient = null
       // Reinitialize triangles to account for new canvas size
       this.initTriangles()
+    }
+
+    private interpolateColor(color1: string, color2: string, factor: number): string {
+      // Convert hex to RGB
+      const hex1 = color1.replace('#', '')
+      const hex2 = color2.replace('#', '')
+
+      const r1 = parseInt(hex1.substr(0, 2), 16)
+      const g1 = parseInt(hex1.substr(2, 2), 16)
+      const b1 = parseInt(hex1.substr(4, 2), 16)
+
+      const r2 = parseInt(hex2.substr(0, 2), 16)
+      const g2 = parseInt(hex2.substr(2, 2), 16)
+      const b2 = parseInt(hex2.substr(4, 2), 16)
+
+      // Interpolate
+      const r = Math.round(r1 + (r2 - r1) * factor)
+      const g = Math.round(g1 + (g2 - g1) * factor)
+      const b = Math.round(b1 + (b2 - b1) * factor)
+
+      // Convert back to hex
+      return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`
     }
 
     private initTriangles() {
@@ -115,15 +134,20 @@
     }
 
     private animate = () => {
-      // Clear canvas with purple gradient background (create once and reuse)
-      if (!this.backgroundGradient) {
-        this.backgroundGradient = this.ctx.createLinearGradient(0, 0, this.canvas.width, this.canvas.height)
-        this.backgroundGradient.addColorStop(0, '#1d0035')
-        this.backgroundGradient.addColorStop(0.5, '#2d0042')
-        this.backgroundGradient.addColorStop(1, '#42004c')
-      }
+      // Create dynamic background gradient based on scroll position
+      const scrollFactor = Math.min(this.scrollY / 1000, 1) // Darken over 1000px of scroll
 
-      this.ctx.fillStyle = this.backgroundGradient
+      // Calculate darker colors based on scroll
+      const baseColor1 = this.interpolateColor('#1d0035', '#0a0015', scrollFactor)
+      const baseColor2 = this.interpolateColor('#2d0042', '#150020', scrollFactor)
+      const baseColor3 = this.interpolateColor('#42004c', '#210025', scrollFactor)
+
+      const gradient = this.ctx.createLinearGradient(0, 0, this.canvas.width, this.canvas.height)
+      gradient.addColorStop(0, baseColor1)
+      gradient.addColorStop(0.5, baseColor2)
+      gradient.addColorStop(1, baseColor3)
+
+      this.ctx.fillStyle = gradient
       this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
 
       // Update and draw triangles
