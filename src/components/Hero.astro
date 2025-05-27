@@ -23,9 +23,9 @@ const { src = '/sunset.jpg' }: Props = Astro.props
       <div class='flex flex-col items-center gap-8 md:items-start'>
         <div>
           <h1 class='text-center text-6xl md:text-left lg:text-8xl'>
-            <slot><span class='text-gradient'>SUNWAVE STUDIO</span> </slot>
+            <slot><span class='text-gradient uppercase'>Studio Effektiv</span> </slot>
             <h2 class='text-center text-2xl md:text-left'>
-              <slot> Web Design & Product Innovation </slot>
+              <slot> Product Innovation Studio </slot>
             </h2>
           </h1>
         </div>
@@ -40,9 +40,9 @@ const { src = '/sunset.jpg' }: Props = Astro.props
           </a> -->
         </div>
       </div>
-      <div class='hero-image-wrapper hidden lg:block'>
+      <!-- <div class='hero-image-wrapper hidden lg:block'>
         <Image class='hero-image' src={src} alt='' decoding='async' width={800} height={600} loading='eager' />
-      </div>
+      </div> -->
     </div>
   </div>
 </section>
@@ -62,8 +62,8 @@ const { src = '/sunset.jpg' }: Props = Astro.props
   }
 
   .hero-image {
-    mask-image: url('/astronaut-hero-img.webp');
-    -webkit-mask-image: url('/astronaut-hero-img.webp');
+    mask-image: url('/mask.webp');
+    -webkit-mask-image: url('/mask.webp');
     mask-position: center;
     -webkit-mask-position: center;
     mask-size: contain;
