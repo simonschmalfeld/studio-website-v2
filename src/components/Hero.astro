@@ -9,15 +9,15 @@ import { Image } from 'astro:assets'
  */
 ---
 
-<section class='hero my-24'>
-  <div class='container'>
+<section id='hero' class='h-screen'>
+  <div class='container flex h-full flex-col items-center justify-center'>
     <div class='grid grid-cols-1 items-center gap-24 lg:grid-cols-2'>
       <div class='flex flex-col items-center gap-8 md:items-start'>
         <div>
           <h1 class='text-center text-6xl md:text-left lg:text-8xl'>
             <slot><span class='text-gradient uppercase'>Studio Effektiv</span> </slot>
             <h2 class='text-center text-2xl md:text-left'>
-              <slot> Web Design & Product Innovation </slot>
+              <slot> Web & Product Innovation </slot>
             </h2>
           </h1>
         </div>
@@ -109,7 +109,7 @@ import { Image } from 'astro:assets'
     if (!typewriterElement) return
 
     const text =
-      'We are a small studio that specializes in web design, product innovation, and emerging technologies. We can help you create a website for your business, design and develop an MVP for your startup, or explore the possibilities of AI and AR for your upcoming product.'
+      'We are a product innovation studio helping startups and forward-thinking teams turn bold ideas into real, interactive experiences. We specialize in highly crafted prototypes, unconventional interfaces, and emerging technologies like Generative AI, Chatbots, and AR.'
 
     let currentIndex = 0
     const typingSpeed = 30 // milliseconds per character
