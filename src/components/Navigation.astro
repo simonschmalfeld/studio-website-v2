@@ -9,19 +9,19 @@ import Logo from './Logo.astro'
  */
 ---
 
-<div id="main-navigation" class="is-desktop py-8 z-50 fixed w-full">
-  <div class="container">
+<div id='main-navigation' class='is-desktop fixed z-50 w-full py-8'>
+  <div class='container'>
     <Logo />
-    <div class="wrapper">
-      <nav class="desktop-menu" aria-label="Main navigation desktop">
-        <ul class="menu">
+    <div class='wrapper'>
+      <nav class='desktop-menu' aria-label='Main navigation desktop'>
+        <ul class='menu'>
           <slot />
         </ul>
       </nav>
       <ResponsiveToggle />
     </div>
-    <nav class="mobile-menu" aria-label="Main navigation mobile">
-      <ul class="menu">
+    <nav class='mobile-menu' aria-label='Main navigation mobile'>
+      <ul class='menu'>
         <slot />
       </ul>
     </nav>
@@ -110,6 +110,17 @@ import Logo from './Logo.astro'
         openDropdownMenu(target)
       } else {
         closeDropdownMenu(target)
+      }
+    }
+
+    const handleScroll = (): void => {
+      const scrollY = window.scrollY
+      const scrollThreshold = 100 // Adjust this value as needed
+
+      if (scrollY > scrollThreshold) {
+        mainNav.classList.add('scrolled')
+      } else {
+        mainNav.classList.remove('scrolled')
       }
     }
 
@@ -223,8 +234,10 @@ import Logo from './Logo.astro'
 
     setActiveMenuItem()
     checkMenuSize()
+    handleScroll() // Initialize scroll state
 
     window.addEventListener('resize', checkMenuSize)
+    window.addEventListener('scroll', handleScroll)
     window.addEventListener('click', (event: MouseEvent) => {
       const element = event.target as Element
       if (!element.hasAttribute('aria-haspopup') && !element.classList.contains('submenu-item')) {
@@ -234,14 +247,41 @@ import Logo from './Logo.astro'
   })
 </script>
 
-<style lang="scss" is:global>
+<style lang='scss' is:global>
   @use '../assets/scss/base/mixins' as *;
 
   #main-navigation {
+    transition: all 0.3s ease-in-out;
+
     > .container {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
+      transition: all 0.3s ease-in-out;
+    }
+
+    &.scrolled {
+      padding: var(--space-xs) var(--space-m);
+
+      > .container {
+        align-items: center;
+        backdrop-filter: blur(10px);
+        margin: 0 auto;
+        box-shadow: var(--elevation-4, 0 4px 20px rgba(0, 0, 0, 0.15));
+        border-radius: var(--radius-full, 9999px);
+        background-color: var(--color-dark, #23204c7e);
+        padding: var(--space-s) var(--space-m);
+        max-width: calc(100% - var(--space-m));
+      }
+
+      a,
+      button {
+        color: var(--color-light, #ffffff) !important;
+      }
+
+      .logo {
+        filter: brightness(0) invert(1);
+      }
     }
 
     &.is-desktop {
@@ -253,10 +293,21 @@ import Logo from './Logo.astro'
       .mobile-menu {
         display: none;
       }
+
+      .menu-item {
+        display: flex;
+        align-items: center;
+      }
     }
 
     &.is-mobile {
       flex-direction: column;
+
+      &.scrolled {
+        > .container {
+          flex-direction: column;
+        }
+      }
 
       .mobile-menu {
         display: none;
@@ -339,6 +390,11 @@ import Logo from './Logo.astro'
       border-radius: var(--radius-l);
       padding: var(--space-m);
 
+      .scrolled & {
+        border-color: rgba(255, 255, 255, 0.1);
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+
       > ul {
         flex-direction: column;
         align-items: flex-start;
@@ -394,6 +450,15 @@ import Logo from './Logo.astro'
         background-color: var(--background-color);
         padding: var(--space-m);
         min-inline-size: 275px;
+
+        .scrolled & {
+          border-color: rgba(255, 255, 255, 0.2);
+          background-color: var(--color-dark, #1a1a1a);
+
+          a {
+            color: var(--color-light, #ffffff) !important;
+          }
+        }
 
         @media (prefers-reduced-motion: no-preference) {
           transition-behavior: allow-discrete;
