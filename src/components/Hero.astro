@@ -17,7 +17,7 @@ import { Image } from 'astro:assets'
           <h1 class='text-center text-6xl md:text-left lg:text-8xl'>
             <slot><span class='text-gradient uppercase'>Studio Effektiv</span> </slot>
             <h2 class='text-center text-2xl md:text-left'>
-              <slot> Web & Product Innovation </slot>
+              <slot> UX & Product Innovation </slot>
             </h2>
           </h1>
         </div>
@@ -32,7 +32,7 @@ import { Image } from 'astro:assets'
           </a> -->
         </div>
       </div>
-      <div id='hero-text' class='hero-image-wrapper mt-24 hidden font-["Domine"] text-xl leading-10 lg:block'>
+      <div id='hero-text' class='hero-image-wrapper mt-24 hidden text-xl leading-10 lg:block'>
         <!-- <Image class='hero-image' src={src} alt='' decoding='async' width={800} height={600} loading='eager' /> -->
         <p id='typewriter-text'>
           <span class='cursor'>|</span>
@@ -109,7 +109,7 @@ import { Image } from 'astro:assets'
     if (!typewriterElement) return
 
     const text =
-      'We are a product innovation studio helping startups and forward-thinking teams turn bold ideas into real, interactive experiences. We specialize in highly crafted prototypes, unconventional interfaces, and emerging technologies like Generative AI, Chatbots, and AR.'
+      'We are a UX & product innovation studio helping startups and forward-thinking teams turn ideas into real, interactive experiences. We specialize in highly crafted prototypes, unconventional user interfaces, and emerging technologies such as Generative AI or Chatbots.'
 
     let currentIndex = 0
     const typingSpeed = 30 // milliseconds per character
